@@ -24,19 +24,22 @@ n == ratings.length
 0 <= ratings[i] <= 2 * 104
 '''
 class Solution:
-    def candy(self, ratings: list[int]) -> int:
+    def candy(self, ratings: List[int]) -> int:
         n = len(ratings)
-        candies = n*[1]
+        candies = [1] * n
 
-        for i in range(1,n):
-            if ratings[i]>ratings[i-1]:
-                candies[i] = candies[i-1] + 1
+        # Left to right: ensure higher rating than left neighbor gets more candy
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
 
-        for i in range(n-2,-1,-1):
-            if ratings[i]>ratings[i+1]:
-                candies[i] = max(candies[i], candies[i+1]+1)
+        # Right to left: ensure higher rating than right neighbor gets more candy
+        for j in range(n - 2, -1, -1):
+            if ratings[j] > ratings[j + 1]:
+                candies[j] = max(candies[j], candies[j + 1] + 1)
 
         return sum(candies)
+
 
 sol = Solution()
 lst = [1,0,2]
