@@ -43,7 +43,7 @@ class Solution:
         char_to_word = {}
         word_to_char = {}
 
-        for char, word in zip(pattern, s):
+        for char, word in zip(pattern, words):
             if char in char_to_word:
                 if char_to_word[char] != word:
                     return False
